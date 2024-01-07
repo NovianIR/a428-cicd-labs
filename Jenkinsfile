@@ -1,21 +1,33 @@
-pipeline {
-    agent {
-        docker {
-            image 'node:20.10.0-alpine3.19' 
-            args '-p 3000:3000' 
-        }
-    }
-    stages {
-        stage('Build') { 
-            steps {
-                sh 'npm install' 
+node {
+       stage('Build') {
+           docker.image('node:20.10.0-alpine3.19').inside('-p 3000:3000') {
+           sh 'npm install'
+           }
+       }
+       stage('Test') {
+        docker.image('node:20.10.0-alpine3.19').inside('-p 3000:3000') {
+            sh './jenkins/scripts/test.sh'
             }
-        }
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
-            }
-        }
-    }
-    
+       }  
 }
+
+// pipeline {
+//     agent {
+//         docker {
+//             image 'node:20.10.0-alpine3.19'
+//             args '-p 3000:3000' 
+//         }
+//     }
+//     stages {
+//         stage('Build') { 
+//             steps {
+//                 sh 'npm install'
+//             }
+//         }
+//     }
+//        stage('Test') {
+//             steps {
+//                 sh './jenkins/scripts/test.sh'
+//             }
+//         }
+// }
