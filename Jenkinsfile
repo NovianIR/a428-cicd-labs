@@ -14,13 +14,13 @@
 pipeline {
     agent {
         docker {
-            image 'node:20.10.0-alpine3.19'
+            image 'timbru31/node-alpine-git:16'
             args '-p 3000:3000'
         }
     }
     environment {
         GITHUB_TOKEN     = credentials('jenkins-github-token')
-        GITHUB_REPOSITORY = 'NovianIR/simple-python-pyinstaller-app'
+        GITHUB_REPOSITORY = 'NovianIR/a428-cicd-labs'
     }
     stages {
         stage('Build') {
