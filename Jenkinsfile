@@ -29,7 +29,7 @@ pipeline {
             steps {
                 sh './jenkins/scripts/deliver.sh'
                 sh 'sleep 60'
-                sh 'chmod +x ./jenkins/scripts/github-pages.sh && ./jenkins/scripts/github-pages.sh'
+                sh 'chmod +x ./jenkins/scripts/github-pages && ./jenkins/scripts/github-pages'
             }
         }
     }
